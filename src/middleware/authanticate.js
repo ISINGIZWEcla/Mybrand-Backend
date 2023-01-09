@@ -19,7 +19,7 @@ function authenticate(req,res,next){
     verify(token,process.env.ACCESS_TOKEN_SECRET,(err, user)=>{
         if(err) return res.sendStatus(403)
         req.user = user;
-        console.log(user)
+        // console.log(user)
         next()
     })
 }

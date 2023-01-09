@@ -28,12 +28,12 @@ const handleErrors=(err)=>{
 
 
 export default async function loginpost (req,res) {
-  console.log('heloooooo')
+  //console.log('heloooooo')
   try{
       const uasers = await user.find()
       // console.log(uasers)
       const auser = uasers.find(user=>user.email===req.body.email)
-      console.log(auser)
+      //console.log(auser)
       if(!auser){
           //return res.status(400).send("couldn't find the user")
           return res.status(400).json({
@@ -54,7 +54,7 @@ export default async function loginpost (req,res) {
             statusCode: '200',
             message:"successfully logged in",
             accesstoken:accesstoken,
-            user:user
+            //user:user
           })
 
       }

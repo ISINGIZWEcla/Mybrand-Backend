@@ -27,16 +27,16 @@ export class BlogController {
             }
             
             const blog = await BlogService.createBlog(post);
-            res.status(200).json({message:"Blog created",data:blog});
+            res.status(201).json({message:"Blog created",data:blog});
         }catch (error){
-            console.log(error)
+            // console.log(error)
             return res.status(500).json({message:'something went wrong',error:error.message})
         }
     }
     static async getBlog(req, res){
         try {
             let blog  = await BlogService.getBlog(req.params.id)
-            return res.json({message: "Here is your blog",blog});
+            return res.status(200).json({message: "Here is your blog",blog});
         } catch {
             return res.status(404).json({ error: "Blog doesn't exist!" });
         }
@@ -52,6 +52,7 @@ export class BlogController {
     }
     static async updateBlog(req, res){
         try {
+            console.log("id---:: ", req.params.id)
             let post =await BlogService.getBlog(req.params.id)
             const {title, content, description} = req.body;
             const imageUrl = await cloudinari.uploadPhoto(req,res,req.files.image);

@@ -237,6 +237,7 @@ const config = {
             JWT: [],
           }],
           parameters: [
+            
             {
               in: 'formData',
               name: 'title',
@@ -337,22 +338,30 @@ const config = {
           }],
           parameters: [
             {
-            name: 'id',
-            in: 'path',
-            description: 'blog\'s id',
-            required: true,
-          },
-            {
-              name: 'body',
-              in: 'body',
-              description: 'creating new user',
+              in: 'path',
+              name: 'id',
               required: true,
-              example:{
-                  "title": "Holla ",
-                  "description": "here is our new blog",
-                  "content":"my content is as followng",
-                  "image": " "
-                }
+            },
+            {
+              in: 'formData',
+              name: 'title',
+              
+            },
+            {
+              in: 'formData',
+              name: 'description',
+              
+            },
+            {
+              in: 'formData',
+              name: 'content',
+              
+            },
+            {
+              name: 'image',
+              in: 'formData',
+              
+              type: 'file',
             },
     
           ],
