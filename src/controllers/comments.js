@@ -18,7 +18,7 @@ export class CommentController {
                 comment,
                 blogId
             })
-        return res.json(_comment)
+        return res.status(201).json(_comment)
     }
     static async findOne(req, res){
         try{

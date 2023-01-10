@@ -17,7 +17,7 @@ export class MessageController {
                 email,
                 message,
             })
-        return res.json({message:"success",_comment})
+        return res.status(201).json({message:"success",_comment})
     }
     static async findOne(req, res){
         try{

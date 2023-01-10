@@ -10,23 +10,19 @@ const user = {
   password: 'Isingizwe22'
 }
 
-const comment= {
-  email: "clara@gmail.com",
-    names: "Klara Isingizwe",
-    comment: "Hello developer, we want to hire you",
-    blogId: "63b97280f7723546cfd22a42"
+const mylike= {
+  userId:"639afec428f5b2436860dd8a",
+  blogId: "63b97280f7723546cfd22a42"
 }
 
-const commentfalse= {
-  email: "clara@gmail.com",
-    names: "Klara Isingizwe",
-    comment: "Hello developer, we want to hire you",
-    blogId: "63b97280f7723546c"
+const mylikeFake= {
+  userId:"639afec428f5b2436860dd",
+  blogId: "63b97280f7723546cfd22a42"
 }
 
 let accesstoken = null
-describe("Comment API test", () => {
-  describe('/GET', () => {
+describe("likes API test", () => {
+  describe('/Patch', () => {
     beforeEach((done) => {
       chai.request(app)
         .post('/api/login')
@@ -36,10 +32,11 @@ describe("Comment API test", () => {
           done();
         });
     });
-    it('it should GET all comments', (done) => {
+    it('it should like', (done) => {
       chai.request(app)
-        .get('/api/comments')
+        .patch('/api/like')
         .set('Authorization', `Bearer ${accesstoken}`)
+        .send(mylike)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           done();
@@ -47,7 +44,7 @@ describe("Comment API test", () => {
     });
   });
 
-  describe('/GET', () => {
+  describe('/Patch', () => {
     beforeEach((done) => {
       chai.request(app)
         .post('/api/login')
@@ -57,10 +54,33 @@ describe("Comment API test", () => {
           done();
         });
     });
-    it('it should GET a single  comment', (done) => {
+    it('it should chech if he user exist before liking', (done) => {
       chai.request(app)
-        .get('/api/comment/63a43269e196080fae88cd8d')
+        .patch('/api/like')
         .set('Authorization', `Bearer ${accesstoken}`)
+        .send(mylikeFake)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          done();
+        });
+    });
+  });
+
+  describe('/Patch', () => {
+    beforeEach((done) => {
+      chai.request(app)
+        .post('/api/login')
+        .send(user)
+        .end((err, res) => {
+          accesstoken = res.body.accesstoken;
+          done();
+        });
+    });
+    it('it should unlike', (done) => {
+      chai.request(app)
+        .patch('/api/unlike')
+        .set('Authorization', `Bearer ${accesstoken}`)
+        .send(mylike)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           done();
@@ -68,19 +88,6 @@ describe("Comment API test", () => {
     });
   });
 
-  describe('/post', () => {
-    it('it should create a comment', (done) => {
-      chai.request(app)
-        .post('/api/comment')
-        .set('Authorization', `Bearer ${accesstoken}`)
-        .send(comment)
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(201);
-          done();
-        });
-    });
-  });
+  
 
-  
-  
- });
+})

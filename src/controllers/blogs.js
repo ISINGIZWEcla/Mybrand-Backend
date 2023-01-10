@@ -103,7 +103,7 @@ export class BlogController {
     static async getAllComments(req, res){
         try{
             const comments = await CommentService.findCommentByBlogId(req.params.id)
-            return res.json({message:"blog comments:",comments})
+            return res.status(200).json({message:"blog comments:",comments})
         }catch (error){
             return res.status(404).json({error: error})
         }
