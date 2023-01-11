@@ -26,7 +26,7 @@ export  async function usersget(req,res) {
   res.send({
     statusCode:'200',
     mesage:"success",
-    users})
+    data:users})
 }
 
 export  async function userget (req,res) {
@@ -35,7 +35,7 @@ export  async function userget (req,res) {
   res.send({
     statusCode:'200',
     mesage:"success",
-    auser
+    data:auser
 })
   } catch{
       res.status(404)
@@ -59,7 +59,7 @@ export  async function userpost(req,res) {
   res.status(201).json({
     statusCode:'201',
     mesage:"success",
-    auser})
+    data:auser})
  }
  catch(err){
   const errors = handleErrors(err);

@@ -7,9 +7,9 @@ export class BlogController {
     static async findAllBlog(req, res){
         try {
             const blogs = await BlogService.findAllBlog();
-            res.json({message:"Here are all blogs",blogs});
+            res.status(200).json({statuscode:'200',message:"success",data:{blogs}});
         }catch (error){
-            return res.status(500).json({message:"something went wrong"})
+            return res.status(500).json({statuscode:'500',message:"something went wrong"})
         }
     }
     static async createBlog(req, res){
@@ -27,18 +27,18 @@ export class BlogController {
             }
             
             const blog = await BlogService.createBlog(post);
-            res.status(201).json({message:"Blog created",data:blog});
+            res.status(201).json({statuscode:'201',message:"Blog created",data:blog});
         }catch (error){
             // console.log(error)
-            return res.status(500).json({message:'something went wrong',error:error.message})
+            return res.status(500).json({statuscode:'500',message:'fail',error:error.message})
         }
     }
     static async getBlog(req, res){
         try {
             let blog  = await BlogService.getBlog(req.params.id)
-            return res.status(200).json({message: "Here is your blog",blog});
+            return res.status(200).json({statuscose:'200',message: "success",data:blog});
         } catch {
-            return res.status(404).json({ error: "Blog doesn't exist!" });
+            return res.status(404).json({stauscode:'404',message:"fail", error: "Blog doesn't exist!" });
         }
     }
     static async getRandom(req, res){
@@ -87,25 +87,25 @@ export class BlogController {
           
             await post.save();
             console.log(res.json({message: "updated successfully",post}))
-            return res.json({message: "updated successfully",post});
+            return res.status(200).json({stauscode:'200',message: "updated successfully",data:post});
         } catch {
-            return res.status(404).json({ error: "Blog doesn't exist!" });
+            return res.status(404).json({statuscode:'404', message:"fail",error: "Blog doesn't exist!" });
         }
     }
     static async deleteBlog(req, res){
         try {
             await BlogService.deleteBlog(req.params.id);
-            return res.status(204).json({message:"delete success"});
+            return res.status(204).json({stauscode:'204',message:"delete success"});
         } catch {
-            return res.status(404).json({ error: "Blog doesn't exist!" });
+            return res.status(404).json({ statuscode:'404', message:"fail",error: "Blog doesn't exist!"});
         }
     }
     static async getAllComments(req, res){
         try{
             const comments = await CommentService.findCommentByBlogId(req.params.id)
-            return res.status(200).json({message:"blog comments:",comments})
+            return res.status(200).json({stauscode:'200',message:"success",data:comments})
         }catch (error){
-            return res.status(404).json({error: error})
+            return res.status(404).json({stauscode:'404',message:"fail",error: error})
         }
 
     }

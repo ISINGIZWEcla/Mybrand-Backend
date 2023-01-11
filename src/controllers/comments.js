@@ -4,9 +4,9 @@ export class CommentController {
     static async getAllComments(req, res){
         try {
             const comments = await CommentService.findAll()
-            return res.json(comments)
+            return res.status(200).json({stauscode:'200',message:"success",data:comments})
         }catch (e) {
-            return res.status(500).json({message:"something went wrong",error:e})
+            return res.status(500).json({stauscode:'500',message:"something went wrong",error:e})
         }
     }
     static async addComment(req, res){
@@ -18,14 +18,14 @@ export class CommentController {
                 comment,
                 blogId
             })
-        return res.status(201).json(_comment)
+        return res.status(201).json({stauscode:'201',message:"comment created",data:_comment})
     }
     static async findOne(req, res){
         try{
             const comment = await CommentService.findOneComment(req.params.id)
-            return res.json(comment)
+            return res.status(200).json({stauscode:'200',message:"success",data:comment})
         }catch(e) {
-            return res.status(404).json({error:"Comment doesn't exist"})
+            return res.status(404).json({stauscode:'404',message:"fail",error:"Comment doesn't exist"})
         }
     }
 }
