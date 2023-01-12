@@ -8,7 +8,7 @@ const users = Router()
 
 users.get("/users", authenticate,authrole ,usersget) 
 users.get("/users/:id", authenticate,authrole, userget)
-users.post("/add-users",AuthValidation, userpost)
+users.post("/add-users", userpost)
 users.delete("/del-user/:id", authenticate,authrole, userdelete)
 
 export default users;
