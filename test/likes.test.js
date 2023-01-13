@@ -54,7 +54,7 @@ describe("likes API test", () => {
           done();
         });
     });
-    it('it should chech if he user exist before liking', (done) => {
+    it('it should chech if he user id is valid exist before liking', (done) => {
       chai.request(app)
         .patch('/api/like')
         .set('Authorization', `Bearer ${accesstoken}`)
@@ -65,6 +65,8 @@ describe("likes API test", () => {
         });
     });
   });
+
+  
 
   describe('/Patch', () => {
     beforeEach((done) => {

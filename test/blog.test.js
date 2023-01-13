@@ -15,8 +15,10 @@ const newBlog= {
   title: "hello",
   description: "description",
   content: "content",
-  image: "http://res.cloudinary.com/dsotw5uoz/image/upload/v1673275211/projects/myBrand/47fbac7a-fa56-4ccc-ae3f-cf9eed078de3_1673275206.015.jpg"
+  image: "http://res.cloudinary.com/dsotw5uoz/image/upload/v1673275211/projects/myBrand/47fbac7a-fa56-4ccc-ae3f-cf9eed078de3_1673275206.015.jpg",
+  created_on: new Date()
 }
+
 let accesstoken = null
 
 describe("Blog API test", () => {
@@ -28,6 +30,19 @@ describe("Blog API test", () => {
         accesstoken = res.body.accesstoken;
         done();
       });
+  });
+
+  describe('/post', () => {
+    it('it create a blog', (done) => {
+      chai.request(app)
+        .post('/api/add-blog')
+        .set('Authorization', `Bearer ${accesstoken}`)
+        .send(newBlog)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(201);
+          done();
+        });
+    });
   });
   describe('/post', () => {
     it('it should show that something is wrong in creating blog', (done) => {
@@ -126,6 +141,23 @@ describe("Blog API test", () => {
         });
     });
   });
+
+  describe('/Get', () => {
+    it('it should print an error in getting likes', (done) => {
+      chai.request(app)
+        .get('/api/blog/63b97280f7723546cfd22/likes')
+        
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          done();
+        });
+    });
+  });
+
+
+
+
+  
 
 
 

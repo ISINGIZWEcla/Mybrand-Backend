@@ -82,7 +82,11 @@ export async function userpatch(req,res){
   }
   catch{
       res.status(404)
-      res.send({error:"user doesn't exist!!"})
+      res.send({
+        satusCode:'404',
+        message:"fail",
+        error:"user doesn't exist!!"
+      })
   }
 }
 export async function userdelete(req,res){

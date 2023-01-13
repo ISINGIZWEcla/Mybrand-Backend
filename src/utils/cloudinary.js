@@ -25,6 +25,7 @@ export default class cloudinari {
             return results
         } catch (error) {
             return res.status(403).send({
+                statusCode:'403',
                 message:"Fail to save image on cloudinary",
                 error:error.message
             })
