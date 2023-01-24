@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tests": "c8 mocha  ./test/*.js  --include='./test/**/*.js' --timeout 500000000 --exit",
-    "start": "node --watch src/index.js",
+    "start": "node  src/index.js",
     "dev": "nodemon -r esm src/index.js"
   },
   "author": "",
