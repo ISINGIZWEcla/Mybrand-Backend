@@ -12,12 +12,13 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerOptions from './docs/index.js';
 import fileUpload from "express-fileupload"
 import 'dotenv/config'
+import cors from 'cors'
 
 import mongoose from "mongoose" 
 mongoose.set('strictQuery', true)
 mongoose
-	//.connect("mongodb+srv://Clarisse:Isingizwe22@cluster0.qxd2jzf.mongodb.net/myBrand", { useNewUrlParser: true })
-	.connect("mongodb://127.0.0.1:27017/acmedb", { useNewUrlParser: true })
+	.connect("mongodb+srv://Clarisse:Isingizwe22@cluster0.qxd2jzf.mongodb.net/myBrand", { useNewUrlParser: true })
+	//.connect("mongodb://127.0.0.1:27017/acmedb", { useNewUrlParser: true })
 	.then(() => {
 		console.log('Database connected successfully')
 	}).catch((err)=>{
@@ -29,6 +30,7 @@ mongoose
         useTempFiles: true
     }
 ));
+  app.use(cors());
 	app.use(bodyParser.json())
 	app.use(express.json())
 	app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerOptions))

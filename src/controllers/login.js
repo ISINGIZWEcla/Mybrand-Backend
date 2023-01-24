@@ -54,7 +54,7 @@ export default async function loginpost (req,res) {
             statusCode: '200',
             message:"successfully logged in",
             accesstoken:accesstoken,
-            //user:user
+            user:user
           })
 
       }

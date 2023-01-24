@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import {BlogService} from "../services/blogs.js";
 import {CommentService} from "../services/comments.js";
+import {LikeServices} from "../services/likes.js";
 import cloudinari from "../utils/cloudinary.js";
 export class BlogController {
     static async findAllBlog(req, res){
@@ -36,9 +37,11 @@ export class BlogController {
     static async getBlog(req, res){
         try {
             let blog  = await BlogService.getBlog(req.params.id)
-            return res.status(200).json({statuscose:'200',message: "success",data:blog});
+            const comments = await CommentService.findCommentByBlogId(req.params.id)
+            let likes = await LikeServices.findLikesByBlogId(req.params.id)
+            return res.json({message:"blog gotten successful", data:blog, comments,likes});
         } catch {
-            return res.status(404).json({stauscode:'404',message:"fail", error: "Blog doesn't exist!" });
+            return res.status(404).json({ error: "Blog doesn't exist!" });
         }
     }
     static async getRandom(req, res){

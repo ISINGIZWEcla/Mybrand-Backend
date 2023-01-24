@@ -1,8 +1,8 @@
 {
   "name": "mybrand-backend",
   "version": "1.0.0",
+  
   "description": "",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "tests": "c8 mocha  ./test/*.js  --include='./test/**/*.js' --timeout 500000000 --exit",
@@ -19,6 +19,7 @@
     "chai": "^4.3.7",
     "chai-http": "^4.3.0",
     "cloudinary": "^1.33.0",
+    "cors": "^2.8.5",
     "coveralls": "^3.1.1",
     "dotenv": "^16.0.3",
     "esm": "^3.2.25",
