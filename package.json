@@ -7,7 +7,8 @@
   "scripts": {
     "tests": "c8 mocha  ./test/*.js  --include='./test/**/*.js' --timeout 500000000 --exit",
     "start": "node  src/index.js",
-    "dev": "nodemon -r  src/index.js"
+    "dev": "nodemon -r  src/index.js",
+    "build": "babel src --out-dir dist --source-maps inline --copy-files"
   },
   "author": "",
   "license": "ISC",
